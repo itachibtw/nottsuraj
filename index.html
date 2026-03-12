@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Suraj Sharma | Founder & Strategist</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css">
+
+    <style>
+        :root {
+            --bg-color: #0a0a0a;
+            --accent: #ffffff;
+            --accent-muted: #a3a3a3;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            background: linear-gradient(180deg, #121212 0%, #050505 100%);
+            color: #d1d5db;
+            font-family: 'Poppins', sans-serif;
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
+
+        h1, h2, h3, .serif-font {
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        ::selection { background-color: var(--accent); color: black; }
+
+        /* FIXED ANIMATIONS: Preserving horizontal centering during vertical movement */
+        .anim-nav { animation: smoothFadeDownCentered 1s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+        .anim-bg-text { animation: smoothFade 1.8s cubic-bezier(0.16, 1, 0.3, 1) 0.2s forwards; opacity: 0; }
+        .anim-hero-img { animation: smoothFadeUpCentered 1.5s cubic-bezier(0.16, 1, 0.3, 1) 0.4s forwards; opacity: 0; }
+        .anim-hero-content { animation: smoothFadeUp 1.2s cubic-bezier(0.16, 1, 0.3, 1) 0.6s forwards; opacity: 0; }
+        
+        @keyframes smoothFadeDownCentered { 
+            0% { opacity: 0; transform: translate(-50%, -40px); } 
+            100% { opacity: 1; transform: translate(-50%, 0); } 
+        }
+
+        @keyframes smoothFadeUpCentered { 
+            0% { opacity: 0; transform: translate(-50%, 40px); } 
+            100% { opacity: 1; transform: translate(-50%, 0); } 
+        }
+
+        @keyframes smoothFadeUp { 
+            0% { opacity: 0; transform: translateY(40px); } 
+            100% { opacity: 1; transform: translateY(0); } 
+        }
+        
+        @keyframes smoothFade { 
+            0% { opacity: 0; transform: scale(0.98); } 
+            100% { opacity: 1; transform: scale(1); } 
+        }
+
+        /* Continuous Floating Animation for Hero Image */
+        .float-anim {
+            animation: float 6s ease-in-out infinite;
+            animation-delay: 1.5s; 
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-15px); }
+        }
+
+        /* Glassmorphism Cards */
+        .glass-card {
+            background: rgba(255, 255, 255, 0.02);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .glass-card:hover {
+            transform: translateY(-8px);
+            background: rgba(255, 255, 255, 0.04);
+            border-color: rgba(255, 255, 255, 0.15);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.6);
+        }
+
+        /* Infinite Marquee */
+        .marquee-container {
+            overflow: hidden;
+            white-space: nowrap;
+            width: 100%;
+            padding: 50px 0;
+            position: relative;
+        }
+        
+        .marquee-container::before, .marquee-container::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            width: 150px;
+            height: 100%;
+            z-index: 2;
+        }
+        .marquee-container::before { left: 0; background: linear-gradient(to right, #121212, transparent); }
+        .marquee-container::after { right: 0; background: linear-gradient(to left, #121212, transparent); }
+
+        .marquee-content {
+            display: inline-block;
+            animation: marquee 25s linear infinite;
+        }
+
+        .marquee-content i {
+            font-size: 4rem;
+            margin: 0 40px;
+            color: #4b5563;
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            vertical-align: middle;
+        }
+
+        .marquee-content i:hover {
+            transform: translateY(-8px) scale(1.15);
+            filter: drop-shadow(0 0 20px rgba(255,255,255,0.3));
+        }
+        .marquee-content i.devicon-html5-plain:hover { color: #E34F26; }
+        .marquee-content i.devicon-css3-plain:hover { color: #1572B6; }
+        .marquee-content i.devicon-javascript-plain:hover { color: #F7DF1E; }
+        .marquee-content i.devicon-python-plain:hover { color: #3776AB; }
+        .marquee-content i.devicon-react-original:hover { color: #61DAFB; }
+        .marquee-content i.devicon-mysql-plain:hover { color: #4479A1; }
+        .marquee-content i.devicon-github-original:hover { color: #ffffff; }
+
+        @keyframes marquee { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+
+        /* Scroll Reveal */
+        .reveal { opacity: 0; transform: translateY(40px); transition: all 1s cubic-bezier(0.16, 1, 0.3, 1); }
+        .reveal.active { opacity: 1; transform: translateY(0); }
+        .delay-100 { transition-delay: 150ms; }
+        .delay-200 { transition-delay: 300ms; }
+    </style>
+</head>
+<body class="antialiased selection:bg-white selection:text-black w-full overflow-x-hidden">
+
+    <nav class="fixed top-6 left-1/2 -translate-x-1/2 w-[90%] max-w-5xl glass-card rounded-full px-8 py-4 flex justify-between items-center z-50 anim-nav">
+        <div class="text-2xl font-bold tracking-widest text-white serif-font hover:scale-105 transition-all duration-300 cursor-pointer drop-shadow-[0_0_12px_rgba(255,255,255,0.4)] hover:drop-shadow-[0_0_20px_rgba(255,255,255,0.8)]">
+            suraj
+        </div>
+        <div class="hidden md:flex gap-8 text-sm font-medium text-neutral-400">
+            <a href="#" class="hover:text-white transition-colors duration-300">Home</a>
+            <a href="#about" class="hover:text-white transition-colors duration-300">About</a>
+            <a href="#projects" class="hover:text-white transition-colors duration-300">Projects</a>
+            <a href="#services" class="hover:text-white transition-colors duration-300">Services</a>
+            <a href="#contact" class="hover:text-white transition-colors duration-300">Contact</a>
+        </div>
+        <div class="flex gap-5 text-neutral-300">
+            <a href="https://github.com/itachibtw" target="_blank" class="hover:text-white hover:scale-110 transition-all duration-300 drop-shadow-[0_0_8px_rgba(255,255,255,0.3)] hover:drop-shadow-[0_0_15px_rgba(255,255,255,0.6)]"><i class="fa-brands fa-github text-lg"></i></a>
+            <a href="https://www.instagram.com/nottsuraj?igsh=NjZ0eGhvNGYzMm9w" target="_blank" class="hover:text-white hover:scale-110 transition-all duration-300 drop-shadow-[0_0_8px_rgba(255,255,255,0.3)] hover:drop-shadow-[0_0_15px_rgba(255,255,255,0.6)]"><i class="fa-brands fa-instagram text-lg"></i></a>
+            <a href="mailto:nottsuraj@gmail.com" class="hover:text-white hover:scale-110 transition-all duration-300 drop-shadow-[0_0_8px_rgba(255,255,255,0.3)] hover:drop-shadow-[0_0_15px_rgba(255,255,255,0.6)]"><i class="fa-solid fa-envelope text-lg"></i></a>
+        </div>
+    </nav>
+
+    <section class="relative h-screen w-full flex items-center justify-center overflow-hidden">
+        
+        <div class="absolute inset-0 flex items-center justify-center pointer-events-none z-0 anim-bg-text">
+            <h1 class="text-[14vw] font-bold text-white/[0.03] whitespace-nowrap tracking-tight select-none mt-10">
+                Hi! I'm Suraj
+            </h1>
+        </div>
+
+        <div class="absolute bottom-0 left-1/2 -translate-x-1/2 w-full max-w-[600px] h-[85vh] z-10 anim-hero-img pointer-events-none">
+            <img src="https://pngfre.com/wp-content/uploads/satoru-gojo-8-1-1211x1536.png" alt="Suraj Sharma" class="w-full h-full object-contain object-bottom drop-shadow-[0_0_30px_rgba(0,0,0,0.8)] float-anim">
+        </div>
+
+        <div class="absolute bottom-10 left-1/2 -translate-x-1/2 w-[90%] max-w-lg z-20">
+            <div class="flex flex-col items-center text-center gap-6 anim-hero-content p-6 rounded-2xl shadow-xl glass-card backdrop-blur-lg border border-white/10 hover:border-white/20 transition-all duration-300">
+                <p class="text-sm text-white italic leading-snug drop-shadow-lg">
+                    "My name is Suraj Sharma. I hate a lot of things, and I don't particularly like anything. What I have is not a dream, because I will make it a reality."
+                </p>
+                <div class="flex flex-wrap justify-center gap-4 w-full">
+                    <a href="#contact" class="px-6 py-3 border border-white/20 rounded-full text-sm font-medium text-white hover:bg-white hover:text-black hover:scale-105 transition-all duration-300 tracking-wider uppercase backdrop-blur-sm">
+                        Contact
+                    </a>
+                    <a href="#about" class="px-6 py-3 bg-white/5 border border-white/10 rounded-full text-sm font-medium text-white hover:bg-white/10 hover:scale-105 transition-all duration-300 tracking-wider uppercase backdrop-blur-sm">
+                        Who I'm
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="about" class="py-32 px-6 max-w-6xl mx-auto text-center border-b border-white/5">
+        <h2 class="reveal text-4xl md:text-5xl font-bold text-white mb-10 tracking-wide">About Me</h2>
+        
+        <p class="reveal text-neutral-400 max-w-3xl mx-auto text-lg leading-relaxed mb-16 font-light">
+            I am a 12th-grade science student operating at the intersection of emerging technology and scalable business. I focus on clean architecture, smooth execution, and building digital products with a relentlessly strategic mindset. As a student of philosophers, I study history’s greatest conquerors to understand how the world is won.
+        </p>
+
+        <div class="grid md:grid-cols-3 gap-8 text-left">
+            <div class="glass-card rounded-2xl overflow-hidden reveal">
+                <div class="h-56 relative overflow-hidden">
+                    <img src="https://images.unsplash.com/photo-1555985202-12975b0235dc?q=80&w=800&auto=format&fit=crop" alt="Alexander the Great" class="w-full h-full object-cover transition-transform duration-700 hover:scale-110 filter grayscale hover:grayscale-0">
+                    <div class="absolute inset-0 bg-gradient-to-t from-[#0a0a0a] to-transparent"></div>
+                </div>
+                <div class="p-6 relative z-10 -mt-10">
+                    <span class="text-white/70 text-xs font-bold tracking-[0.2em] uppercase">The Vision</span>
+                    <h3 class="text-xl font-bold text-white mt-1 mb-2 serif-font">Alexander The Great</h3>
+                    <p class="text-neutral-400 text-sm font-light leading-relaxed">A world that was never enough. The blueprint for infinite expansion and the absolute refusal to recognize borders.</p>
+                </div>
+            </div>
+
+            <div class="glass-card rounded-2xl overflow-hidden reveal delay-100">
+                <div class="h-56 relative overflow-hidden">
+                    <img src="https://images.unsplash.com/photo-1618015359700-1f9e9518e388?q=80&w=800&auto=format&fit=crop" alt="Julius Caesar" class="w-full h-full object-cover transition-transform duration-700 hover:scale-110 filter grayscale hover:grayscale-0">
+                    <div class="absolute inset-0 bg-gradient-to-t from-[#0a0a0a] to-transparent"></div>
+                </div>
+                <div class="p-6 relative z-10 -mt-10">
+                    <span class="text-white/70 text-xs font-bold tracking-[0.2em] uppercase">The Tactic</span>
+                    <h3 class="text-xl font-bold text-white mt-1 mb-2 serif-font">Julius Caesar</h3>
+                    <p class="text-neutral-400 text-sm font-light leading-relaxed">Decisive action and calculated risk. Crossing the Rubicon in business requires the exact same psychological warfare.</p>
+                </div>
+            </div>
+
+            <div class="glass-card rounded-2xl overflow-hidden reveal delay-200">
+                <div class="h-56 relative overflow-hidden">
+                    <img src="https://images.unsplash.com/photo-1584281722880-9280cefc2f5c?q=80&w=800&auto=format&fit=crop" alt="Napoleon Bonaparte" class="w-full h-full object-cover transition-transform duration-700 hover:scale-110 filter grayscale hover:grayscale-0">
+                    <div class="absolute inset-0 bg-gradient-to-t from-[#0a0a0a] to-transparent"></div>
+                </div>
+                <div class="p-6 relative z-10 -mt-10">
+                    <span class="text-white/70 text-xs font-bold tracking-[0.2em] uppercase">The Discipline</span>
+                    <h3 class="text-xl font-bold text-white mt-1 mb-2 serif-font">Napoleon Bonaparte</h3>
+                    <p class="text-neutral-400 text-sm font-light leading-relaxed">Carrying discipline in my bones. The understanding that strategy without relentless, exhausting execution is worthless.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="border-b border-white/5">
+        <div class="marquee-container">
+            <div class="marquee-content">
+                <i class="devicon-html5-plain"></i>
+                <i class="devicon-css3-plain"></i>
+                <i class="devicon-javascript-plain"></i>
+                <i class="devicon-python-plain"></i>
+                <i class="devicon-react-original"></i>
+                <i class="devicon-mysql-plain"></i>
+                <i class="devicon-github-original"></i>
+                <i class="fa-solid fa-file-excel hover:text-green-500"></i>
+                <i class="fa-solid fa-microchip hover:text-white"></i>
+                
+                <i class="devicon-html5-plain"></i>
+                <i class="devicon-css3-plain"></i>
+                <i class="devicon-javascript-plain"></i>
+                <i class="devicon-python-plain"></i>
+                <i class="devicon-react-original"></i>
+                <i class="devicon-mysql-plain"></i>
+                <i class="devicon-github-original"></i>
+                <i class="fa-solid fa-file-excel hover:text-green-500"></i>
+                <i class="fa-solid fa-microchip hover:text-white"></i>
+            </div>
+        </div>
+    </section>
+
+    <section id="projects" class="py-32 px-6 max-w-7xl mx-auto border-b border-white/5">
+        <div class="text-center mb-16 reveal">
+            <h2 class="text-4xl md:text-5xl font-bold text-white tracking-wide">Projects</h2>
+        </div>
+
+        <div class="grid md:grid-cols-3 gap-8">
+            <div class="glass-card rounded-2xl p-8 reveal group flex flex-col justify-between hover:border-white/20 transition-all duration-300">
+                <div>
+                    <h3 class="text-2xl font-bold text-white mb-3 serif-font group-hover:text-neutral-200 transition-colors">1. Portfolio Website</h3>
+                    <p class="text-neutral-400 mb-6 text-sm font-light leading-relaxed">Personal portfolio built to showcase my design, coding projects, and strategic mindset using modern web interfaces and fluid animations.</p>
+                </div>
+                <div class="flex gap-2 flex-wrap mb-6">
+                    <span class="text-xs border border-white/10 px-3 py-1 rounded-full text-neutral-300 hover:bg-white/10 transition-colors cursor-default">HTML</span>
+                    <span class="text-xs border border-white/10 px-3 py-1 rounded-full text-neutral-300 hover:bg-white/10 transition-colors cursor-default">CSS</span>
+                    <span class="text-xs border border-white/10 px-3 py-1 rounded-full text-neutral-300 hover:bg-white/10 transition-colors cursor-default">JS</span>
+                </div>
+                <a href="#" class="inline-block mt-auto text-sm bg-white text-black font-medium px-5 py-3 rounded-full text-center hover:bg-neutral-200 hover:scale-[1.02] transition-all uppercase tracking-widest">Active</a>
+            </div>
+
+            <div class="glass-card rounded-2xl p-8 reveal delay-100 group flex flex-col justify-between hover:border-white/20 transition-all duration-300">
+                <div>
+                    <h3 class="text-2xl font-bold text-white mb-3 serif-font group-hover:text-neutral-200 transition-colors">2. ThePrintr Business</h3>
+                    <p class="text-neutral-400 mb-6 text-sm font-light leading-relaxed">My e-commerce brand operating on Amazon. Specializing in customized posters, polaroids, and executing expansion into premium stationery.</p>
+                </div>
+                <div class="flex gap-2 flex-wrap mb-6">
+                    <span class="text-xs border border-white/10 px-3 py-1 rounded-full text-neutral-300 hover:bg-white/10 transition-colors cursor-default">E-Commerce</span>
+                    <span class="text-xs border border-white/10 px-3 py-1 rounded-full text-neutral-300 hover:bg-white/10 transition-colors cursor-default">Business</span>
+                    <span class="text-xs border border-white/10 px-3 py-1 rounded-full text-neutral-300 hover:bg-white/10 transition-colors cursor-default">Strategy</span>
+                </div>
+                <a href="https://theprintr.tiiny.site" target="_blank" class="inline-block mt-auto text-sm bg-white text-black font-medium px-5 py-3 rounded-full text-center hover:bg-neutral-200 hover:scale-[1.02] transition-all uppercase tracking-widest">Live Demo</a>
+            </div>
+
+            <div class="glass-card rounded-2xl p-8 reveal delay-200 group flex flex-col justify-between border-dashed border-white/10 bg-transparent hover:border-white/20 transition-all duration-300">
+                <div class="opacity-70 group-hover:opacity-100 transition-opacity duration-300">
+                    <h3 class="text-2xl font-bold text-white mb-3 serif-font">3. AI E-Commerce App</h3>
+                    <p class="text-neutral-400 mb-6 text-sm font-light leading-relaxed">A highly scalable, AI-powered application designed to revolutionize e-commerce metrics and user experience. Currently in active development.</p>
+                </div>
+                <div class="flex gap-2 flex-wrap mb-6 opacity-70 group-hover:opacity-100 transition-opacity duration-300">
+                    <span class="text-xs border border-white/10 px-3 py-1 rounded-full text-neutral-300 hover:bg-white/10 transition-colors cursor-default">AI / ML</span>
+                    <span class="text-xs border border-white/10 px-3 py-1 rounded-full text-neutral-300 hover:bg-white/10 transition-colors cursor-default">Python</span>
+                    <span class="text-xs border border-white/10 px-3 py-1 rounded-full text-neutral-300 hover:bg-white/10 transition-colors cursor-default">Data</span>
+                </div>
+                <button disabled class="inline-block mt-auto text-sm border border-white/10 text-neutral-500 font-medium px-5 py-3 rounded-full text-center cursor-not-allowed uppercase tracking-widest hover:border-neutral-500/20 transition-all duration-300">Coming Soon</button>
+            </div>
+        </div>
+    </section>
+
+    <section id="services" class="py-32 px-6 max-w-7xl mx-auto border-b border-white/5">
+        <div class="text-center mb-16 reveal">
+            <h2 class="text-4xl md:text-5xl font-bold text-white tracking-wide">Services</h2>
+        </div>
+
+        <div class="grid md:grid-cols-3 gap-8">
+            <div class="glass-card rounded-2xl p-8 reveal flex flex-col items-start hover:border-white/20 transition-all duration-300 group">
+                <div class="text-4xl text-white mb-6 p-4 bg-white/5 rounded-xl border border-white/10 flex items-center justify-center w-16 h-16 group-hover:scale-110 group-hover:bg-white/10 transition-all duration-300">
+                    <i class="fa-solid fa-chart-line"></i>
+                </div>
+                <h3 class="text-2xl font-bold text-white mb-4 serif-font">E-Commerce Brand Strategy</h3>
+                <p class="text-neutral-400 text-sm font-light leading-relaxed flex-grow">Helping businesses build and scale their brand presence across online marketplaces like Amazon, with a focus on data-driven marketing, optimized product listings, and sustainable growth.</p>
+            </div>
+
+            <div class="glass-card rounded-2xl p-8 reveal delay-100 flex flex-col items-start hover:border-white/20 transition-all duration-300 group">
+                <div class="text-4xl text-white mb-6 p-4 bg-white/5 rounded-xl border border-white/10 flex items-center justify-center w-16 h-16 group-hover:scale-110 group-hover:bg-white/10 transition-all duration-300">
+                    <i class="fa-solid fa-bullhorn"></i>
+                </div>
+                <h3 class="text-2xl font-bold text-white mb-4 serif-font">Digital Marketing</h3>
+                <p class="text-neutral-400 text-sm font-light leading-relaxed flex-grow">Crafting data-driven digital marketing campaigns to reach your target audience and drive conversions. From social media marketing to search engine optimization (SEO), I will help you connect with your customers and achieve your business goals.</p>
+            </div>
+
+            <div class="glass-card rounded-2xl p-8 reveal delay-200 flex flex-col items-start hover:border-white/20 transition-all duration-300 group">
+                <div class="text-4xl text-white mb-6 p-4 bg-white/5 rounded-xl border border-white/10 flex items-center justify-center w-16 h-16 group-hover:scale-110 group-hover:bg-white/10 transition-all duration-300">
+                    <i class="fa-solid fa-laptop-code"></i>
+                </div>
+                <h3 class="text-2xl font-bold text-white mb-4 serif-font">UI/UX Design</h3>
+                <p class="text-neutral-400 text-sm font-light leading-relaxed flex-grow">Designing intuitive, user-centered digital experiences that drive engagement and conversion. From user research and wireframing to prototyping and visual design, I will create experiences that make an impact.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="py-32 px-6 max-w-5xl mx-auto text-center">
+        <h2 class="reveal text-4xl md:text-5xl font-bold text-white tracking-wide mb-6">Contact Me</h2>
+        <p class="reveal text-neutral-400 mb-12 font-light text-lg">If you want to work together, discuss strategy, or have any questions, tap into the network.</p>
+
+        <div class="reveal delay-100 flex flex-col md:flex-row justify-center items-center gap-6">
+            <a href="mailto:nottsuraj@gmail.com" class="w-full md:w-auto glass-card px-8 py-4 rounded-full flex items-center justify-center gap-3 hover:bg-white hover:text-black transition-all group hover:border-white/20 duration-300 hover:-translate-y-2">
+                <i class="fa-solid fa-envelope text-lg group-hover:scale-110 transition-transform"></i>
+                <span class="font-medium tracking-wide">nottsuraj@gmail.com</span>
+            </a>
+
+            <a href="https://www.instagram.com/nottsuraj?igsh=NjZ0eGhvNGYzMm9w" target="_blank" class="w-full md:w-auto glass-card px-8 py-4 rounded-full flex items-center justify-center gap-3 hover:bg-white hover:text-black transition-all group hover:border-white/20 duration-300 hover:-translate-y-2">
+                <i class="fa-brands fa-instagram text-lg group-hover:scale-110 transition-transform"></i>
+                <span class="font-medium tracking-wide">nottsuraj</span>
+            </a>
+
+            <a href="https://github.com/itachibtw" target="_blank" class="w-full md:w-auto glass-card px-8 py-4 rounded-full flex items-center justify-center gap-3 hover:bg-white hover:text-black transition-all group hover:border-white/20 duration-300 hover:-translate-y-2">
+                <i class="fa-brands fa-github text-lg group-hover:scale-110 transition-transform"></i>
+                <span class="font-medium tracking-wide">itachibtw</span>
+            </a>
+        </div>
+    </section>
+
+    <footer class="py-10 text-center text-neutral-600 text-sm font-light border-t border-white/5 tracking-widest uppercase">
+        <p>&copy; 2026 Suraj Sharma All rights reserved </p>
+    </footer>
+
+    <script>
+        function reveal() {
+            var reveals = document.querySelectorAll(".reveal");
+            for (var i = 0; i < reveals.length; i++) {
+                var windowHeight = window.innerHeight;
+                var elementTop = reveals[i].getBoundingClientRect().top;
+                if (elementTop < windowHeight - 50) {
+                    reveals[i].classList.add("active");
+                }
+            }
+        }
+        window.addEventListener("scroll", reveal);
+        reveal(); 
+    </script>
+
+    <script type="module">
+        import { inject } from 'https://esm.sh/@vercel/analytics';
+        inject();
+    </script>
+</body>
+</html>
